@@ -1,0 +1,98 @@
+body {
+	background: white;
+}
+:root {
+	--p-color: indianred;
+	--p-color-hover: #f66f6f;
+}
+
+.instruction {
+	background: #fff;
+	color: #333;
+	min-width: 300px;
+	text-align: justify;
+	max-width: 400px;
+	margin: 0 auto;
+	border-radius: 12px;
+	padding: 15px 30px;
+	box-shadow: 0 0 0 rgba(0,0,0,0.3);
+	transition: all .3s ease-out;
+}
+
+.instruction:hover {
+	box-shadow: 0 0 6px rgba(0,0,0,0.3);
+}
+
+.wg-btn-group {
+	display: flex;
+	justify-content: center;
+}
+
+.wg-btn {
+	border: none;
+	border-radius: 8px;
+	margin: 10px 5px;
+	color: white;
+	padding: .5rem 1.5rem;
+	background-color: var(--p-color);
+	line-height: 40px;
+	font-size: 1.3rem;
+	transition: all .3s ease-out;
+	cursor: pointer;
+	box-shadow: 0 0px 3px 0 rgba(0,0,0,.1);
+}
+
+.wg-btn.is-flat {
+	padding: 0rem 1.5rem;
+}
+
+.wg-btn.is-white {
+	background: #fff;
+	color: #333;
+}
+
+.wg-btn:hover,
+.wg-btn:focus {
+	color: white;
+	padding: .5rem 2rem;
+	background-color: var(--p-color-hover);
+	box-shadow: 0 3px 6px 2px rgba(0,0,0,.3);
+}
+
+.container {
+	margin: 0 auto;
+	max-width: 800px;
+}
+
+.wg-options {
+	display: flex;
+	justify-content: space-around;
+}
+
+.wg-options > div {
+	flex: 0 0 auto;
+	padding: .5rem 1.5rem;
+	border: solid 1px #ddd;
+	border-radius: 30px;
+}
+
+.wg-options > div:hover {
+	border-color: var(--p-color);
+	cursor: default;
+}
+.wg-options > div > span:first-child {
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	display: inline-block;
+	border-radius: 50%;
+	background-color: #eee;
+	margin: 0 .5rem 0 -1rem;
+}
+.text-center {
+	text-align: center;
+}
+.text-right {
+	text-align: right;
+}
