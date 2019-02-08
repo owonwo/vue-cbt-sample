@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import QuestionBox from '@/components/QuestionBox';
 
 describe('QuestionBox.vue', () => {
@@ -9,7 +9,7 @@ describe('QuestionBox.vue', () => {
     answer: 0,
   };
 
-  const wrapper = mount(QuestionBox, {
+  const wrapper = shallowMount(QuestionBox, {
     propsData: { question, index },
   });
 
@@ -17,13 +17,18 @@ describe('QuestionBox.vue', () => {
     expect(wrapper.props().question).to.equal(question);
   });
 
-  // it('change value when button is clicked', () => {
-  //   wrapper
-  //     .find('.answers .wg-btn:first-child')
-  //     .trigger('click');
+  it('change value when button is clicked', () => {
+    wrapper
+      .find('.answers .wg-btn:first-child')
+      .trigger('click');
 
-  //   expect(wrapper.givenAnswer).toContain('1');
-  // });
+    expect(wrapper.vm.givenAnswer).to.equal(1);
+
+    wrapper
+      .find('.answers .wg-btn:last-child')
+      .trigger('click');
+    expect(wrapper.vm.givenAnswer).to.equal(3);
+  });
 
   it('should render Question', () => {
     expect(wrapper.find('.question-text').text())
