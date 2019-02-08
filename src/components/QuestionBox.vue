@@ -5,7 +5,8 @@
         <h3 class="question-text"> {{ $props.question.text }} ?</h3>
         <div class="answers wg-btn-group">
           <button
-            v-for="num in 3" 
+            v-for="num in 3"
+            :key="num"
             class="wg-btn is-flat"
             :class="{'is-white': !answerMatches(num) }"
             @click="setAnswer(num)">

@@ -11,13 +11,20 @@
       <div><span>3</span>Yes, this is me</div>
     </div>
     <QuestionBox
-      v-for="(question, index) in questions" 
+      v-for="(question, index) in questions"
       :key="index"
-      :index="index + 1" 
+      :index="index + 1"
       :question="question"
       v-model="question.answer"
       @change="confirmAnswer(question)"/>
-    <div class="text-right">
+    <div class="wg-bottom-bar text-right">
+      <div>
+        <transition name="fade">
+          <div v-show="errors.incomplete_question" class="notification is-danger">
+            Please answer all the question.
+          </div>
+          </transition>
+      </div>
       <button class="wg-btn" @click="validate()">
         Submit Answers
       </button>
@@ -32,47 +39,69 @@ export default {
   name: 'Questions',
   components: { QuestionBox },
   created() {
-    // make the request with axios
-    const payload = {
-      status: true,
-      questions: [
-        'Nigeria is a great country',
-        'I love doing what i do',
-        'The most important aspect in any body life is to own a laptop and a iphone and a house and a school',
-        'Good to know',
-        'This is testing me',
-      ],
-    };
-    const makeQuestion = question => ({
-      id: Symbol('id'),
-      text: question,
-      answer: 0,
-      answered: false,
-      wasSubmitted: false,
+    // making request to endpoint
+    const config = Object.freeze({
+      url: 'http://test.natterbase.com:3002/questions',
+      headers: {
+        'X-ACCESS-TOKEN': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiMDAwMDAwMDMiLCJpYXQiOjE1MzM2NDQwOTMsImV4cCI6MTU2NTA5MzY5M30.oMv_mQN6mAAmAVrRAozC7Ytk3omAye9P_TQ8Xyg3VOE',
+      },
     });
 
-    this.questions = payload.questions.map(makeQuestion);
+    window.axios.get(config.url, config)
+      .then(({ data: payload }) => payload.questions.map(this.makeQuestion))
+      .then((questions) => {
+        this.questions = questions;
+      }).catch(() => {
+        window.alert('An error occurred when trying to fetch questions.');
+      });
   },
   data: () => ({
     questions: [],
+    errors: {
+      incomplete_question: false,
+    },
   }),
   methods: {
     validate() {
       this.questions = this.questions
         .map(this.confirmAnswer)
         .map(this.markAsSubmitted);
-      if (this.questions.filter(e => !e.answered).length === 0) {
+
+      if (this.answeredAllQuestions()) {
         this.$router.push({ name: 'SuccessPage' });
+      } else {
+        this.errors.incomplete_question = true;
+        setTimeout(() => {
+          this.errors.incomplete_question = false;
+        }, 3000);
       }
     },
+    answeredAllQuestions() {
+      return this.getUnansweredQuestion().length === 0;
+    },
+    getAnsweredQuestion() {
+      return this.questions.filter(e => e.answered);
+    },
+    getUnansweredQuestion() {
+      return this.questions.filter(e => !e.answered);
+    },
     markAsSubmitted(question) {
-      question.wasSubmitted = true;
-      return question;
+      return Object.assign(question, {
+        wasSubmitted: true,
+      });
     },
+    makeQuestion: question => ({
+      id: Symbol('id'),
+      text: question,
+      answer: 0,
+      answered: false,
+      wasSubmitted: false,
+    }),
     confirmAnswer(question) {
-      question.answered = (!!question.answer);
-      return question;
+      return Object.assign(question, {
+        answered: (!!question.answer),
+      });
     },
-  }
+  },
 };
 </script>

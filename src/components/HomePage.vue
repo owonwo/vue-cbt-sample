@@ -10,7 +10,7 @@
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem beatae ipsum at consectetur pariatur eaque, neque consequatur distinctio reiciendis, quod maiores assumenda dolore, animi debitis dolorum quos ex. Minus, ex!</p>
       <p>Please start when ready!</p>
       <div class="text-center">
-        <router-link :to="{name: 'Questions'}" tag="button" class="wg-btn">
+        <router-link :to="{name: 'Questions'}" tag="button" class="wg-btn is-scaling">
         	Start
         </router-link>
       </div>

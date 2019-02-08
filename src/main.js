@@ -5,6 +5,7 @@ import App from './App';
 import router from './router';
 
 require('@/assets/css/basic.css');
+window.axios = require('axios');
 
 Vue.config.productionTip = false;
 
