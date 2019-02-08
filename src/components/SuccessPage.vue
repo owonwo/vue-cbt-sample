@@ -1,11 +1,7 @@
 <template>
 	<section class="container">
-	  <h1>
-	    Questions Submitted!
-	  </h1>
-	  <p>
-	    Your answers were submitted successfully
-	  </p>
+	  <h1>Questions Submitted!</h1>
+	  <p>Your answers were submitted successfully.</p>
 	</section>
 </template>
 

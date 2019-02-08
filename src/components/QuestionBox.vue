@@ -2,7 +2,7 @@
   <div class="question-box" :class="{'has-error': hasNoAnswer }">
       <div class="counter">{{$props.index}}</div>
       <div class="question-content">
-        <h3 class="question-text"> {{ $props.question.text }} ?</h3>
+        <h3 class="question-text"> {{ $props.question.text }}?</h3>
         <div class="answers wg-btn-group">
           <button
             v-for="num in 3"
@@ -29,7 +29,7 @@ export default {
   }),
   computed: {
     hasNoAnswer() {
-      const { wasSubmitted, answered } = this.$props.question;
+      const { wasSubmitted, answered } = this.$props.question || { wasSubmitted: false };
       return wasSubmitted ? !answered : false;
     },
   },

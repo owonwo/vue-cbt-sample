@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center container">
+  <div id="homepage" class="text-center container">
     <h1>9to5</h1>
     <h3>Test your fit with work and be the wiser</h3>
     <div class="instruction">

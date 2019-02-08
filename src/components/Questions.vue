@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import QuestionBox from '@/components/QuestionBox';
 
 export default {
@@ -47,12 +48,12 @@ export default {
       },
     });
 
-    window.axios.get(config.url, config)
+    axios.get(config.url, config)
       .then(({ data: payload }) => payload.questions.map(this.makeQuestion))
       .then((questions) => {
         this.questions = questions;
       }).catch(() => {
-        window.alert('An error occurred when trying to fetch questions.');
+        alert('An error occurred when trying to fetch questions.');
       });
   },
   data: () => ({
